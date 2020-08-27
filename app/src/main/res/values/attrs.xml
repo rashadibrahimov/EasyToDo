@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ds">
+        <attr name="checkBoxColor" format="color" />
+        <attr name="emailColor" format="color" />
+        <attr name="buttonColor" format="color" />
+        <attr name="alarmColor" format="color" />
+        <attr name="remindMeSnoozeColor" format="color" />
+        <attr name="todoBackground" format="color" />
+        <attr name="todoText" format="color" />
+    </declare-styleable>
+</resources>
