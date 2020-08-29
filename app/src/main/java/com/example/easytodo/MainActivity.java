@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private Cursor timeCursor;
     private Cursor titleCursor;
     private int i;
-    private int j;
     private int k;
     private int count;
 
@@ -75,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         todosImageView = findViewById(R.id.todosImageView);
         todosTextView = findViewById(R.id.todosTextView);
 
-        i = 0;
-        j = 0;
         k = 0;
 
         check();
@@ -102,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             todosImageView.setVisibility(View.VISIBLE);
             todosTextView.setVisibility(View.VISIBLE);
             i = 0;
-            j = 0;
             dateCursor = null;
             timeCursor = null;
             titleCursor = null;
@@ -283,9 +279,10 @@ public class MainActivity extends AppCompatActivity {
             timeCursor = mDatabase.query(DatabaseHelper.TABLE_NAME, new String[]{DatabaseHelper.TIME}, null, null, null, null, null);
             titleCursor = mDatabase.query(DatabaseHelper.TABLE_NAME, new String[]{DatabaseHelper.TITLE}, null, null, null, null, null);
 
+            i = 0;
+
             if (getAllTodos().getCount() == 0) {
                 i = 0;
-                j = 0;
             } else {
                 while (i < count) {
                     notifyMe();
@@ -305,7 +302,6 @@ public class MainActivity extends AppCompatActivity {
 
             if (getAllTodos().getCount() == 0) {
                 i = 0;
-                j = 0;
             } else {
                 stopNotification(data.getIntExtra("position", 0));
                 notifyMeAfterUpdated(data.getIntExtra("position", 0));
@@ -339,40 +335,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void notifyMe() {
+        Intent intent = new Intent(this, ReminderBroadcast.class);
 
-        while (j < getAllTodos().getCount()) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-            Intent intent = new Intent(this, ReminderBroadcast.class);
+        String date;
+        String time;
+        String dateAndTime;
+        String title;
 
-            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        date = getDate();
+        time = getTime();
+        title = getItemTitle();
 
-            String date;
-            String time;
-            String dateAndTime;
-            String title;
+        dateAndTime = date + " " + time;
 
-            date = getDate();
-            time = getTime();
-            title = getItemTitle();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, yyyy HH:mm");
 
-            dateAndTime = date + " " + time;
+        try {
+            Date mDate = sdf.parse(dateAndTime);
+            long dateTimeInMillis = mDate.getTime();
+            intent.putExtra("title", title);
+            intent.putExtra("i", i);
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd MMM, yyyy HH:mm");
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0);
 
-            try {
-                Date mDate = sdf.parse(dateAndTime);
-                long dateTimeInMillis = mDate.getTime();
-                intent.putExtra("title", title);
-                intent.putExtra("i", i);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, intent, 0);
-
-                alarmManager.set(AlarmManager.RTC_WAKEUP, dateTimeInMillis, pendingIntent);
-
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            j++;
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 

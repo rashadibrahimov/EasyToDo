@@ -7,12 +7,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundColor">#F0F1F9</item>
-        <item name="titleTextColor">#FFFFFF</item>
         <item name="alarmColor">#808080</item>
         <item name="remindMeSnoozeColor">#808080</item>
         <item name="android:itemBackground">#FCFCFC</item>
         <item name="android:itemTextAppearance">@style/MyActionBar.MenuTextStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/AppTheme.OverFlow</item>
         <item name="todoBackground">#FFFFFF</item>
         <item name="todoText">#808080</item>
         <item name="colorControlNormal">#808080</item>
@@ -26,12 +24,10 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">#FFC107</item>
         <item name="backgroundColor">#303030</item>
-        <item name="titleTextColor">#808080</item>
         <item name="alarmColor">#FFFFFF</item>
         <item name="remindMeSnoozeColor">#FFFFFF</item>
         <item name="android:itemBackground">#303030</item>
         <item name="android:itemTextAppearance">@style/MyActionBar.MenuTextStyle</item>
-        <item name="android:actionOverflowButtonStyle">@style/DarkTheme.OverFlow</item>
         <item name="todoBackground">#444444</item>
         <item name="todoText">#FFFFFF</item>
         <item name="colorControlNormal">#808080</item>
@@ -54,16 +50,6 @@
         <item name="android:textColor">#808080</item>
     </style>
 
-    <style name="AppTheme.OverFlow">
-        <item name="android:src">@drawable/ic_baseline_more_vert_24</item>
-        <item name="android:width">32dp</item>
-    </style>
-
-    <style name="DarkTheme.OverFlow">
-        <item name="android:src">@drawable/ic_baseline_more_vert_24_dark</item>
-        <item name="android:width">32dp</item>
-    </style>
-
     <style name="AppTheme.Switch" parent="Theme.AppCompat.Light">
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="android:colorForeground">#808080</item>
@@ -76,7 +62,7 @@
 
     <style name="AppTheme.Spinner">
         <item name="android:textColor">#808080</item>
-        <item name="android:background">#FFFFFF</item>
+        <item name="android:background">#F0F1F9</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">8dp</item>
     </style>
